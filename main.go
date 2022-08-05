@@ -9,6 +9,7 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
+	"runtime"
 	"time"
 )
 
@@ -60,7 +61,18 @@ func main() {
 }
 
 func clearScreen(w io.Writer) {
-	cmd := exec.Command(`clear`)
+	var cmd *exec.Cmd
+	os := runtime.GOOS
+	
+	switch os {
+	case "linux":
+		cmd = exec.Command(`clear`)
+	case "windows":
+		cmd = exec.Command(`cls`)
+	default:
+		return
+	}
+
 	cmd.Stdout = w
 	err := cmd.Run()
 	if err != nil {
