@@ -12,10 +12,10 @@ const (
 	SCISSORS = 2
 )
 
-func RoundWinner(plChoice, compChoice int) (int, int) {
-	if plChoice == compChoice {
+func RoundWinner(player1, player2 int) (resPlayer1 int, resPlayer2 int) {
+	if player1 == player2 {
 		return 0, 0
-	} else if (plChoice+1)%3 == compChoice {
+	} else if (player1+1)%3 == player2 {
 		return 0, 1
 	} else {
 		return 1, 0

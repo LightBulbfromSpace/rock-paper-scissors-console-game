@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	rps "github.com/LightBulbfromSpace/rock-paper-scissors-console-game/rps"
+	rps "github.com/LightBulbfromSpace/rock-paper-scissors-console-game/pkg"
 	"io"
 	"log"
 	"math/rand"
