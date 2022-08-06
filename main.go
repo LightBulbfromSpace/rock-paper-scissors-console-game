@@ -93,7 +93,7 @@ func clearScreen(w io.Writer) {
 	}
 }
 
-func roundWinner(plChoice, compChoice int) (int, int) {
+func RoundWinner(plChoice, compChoice int) (int, int) {
 	if plChoice == compChoice {
 		return 0, 0
 	} else if (plChoice+1)%3 == compChoice {
@@ -103,7 +103,7 @@ func roundWinner(plChoice, compChoice int) (int, int) {
 	}
 }
 
-func convertPlayerChoiceToNum(playerChoice string) (int, error) {
+func ConvertPlayerChoiceToNum(playerChoice string) (int, error) {
 	var playerChoiceNum int
 	switch playerChoice {
 	case "r", "rock":
@@ -121,7 +121,7 @@ func convertPlayerChoiceToNum(playerChoice string) (int, error) {
 	return playerChoiceNum, nil
 }
 
-func covertComputerChoiceToString(computerChoiceNum int) string {
+func CovertComputerChoiceToString(computerChoiceNum int) string {
 	var computerChoice string
 	switch computerChoiceNum {
 	case 0:
