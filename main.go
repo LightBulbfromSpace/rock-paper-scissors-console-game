@@ -43,7 +43,7 @@ func main() {
 			}
 
 			playerChoice = playerChoice[:len(playerChoice)-1]
-			playerChoiceNum, err := convertPlayerChoiceToNum(playerChoice)
+			playerChoiceNum, err := ConvertPlayerChoiceToNum(playerChoice)
 
 			if err != nil {
 				fmt.Println(err)
@@ -51,10 +51,10 @@ func main() {
 			}
 
 			computerChoiceNum := rand.Int() % 3
-			computerChoice := covertComputerChoiceToString(computerChoiceNum)
+			computerChoice := CovertComputerChoiceToString(computerChoiceNum)
 			fmt.Printf("Computer chooses: %s\n", computerChoice)
 
-			currPlayerScore, currComputerScore := roundWinner(playerChoiceNum, computerChoiceNum)
+			currPlayerScore, currComputerScore := RoundWinner(playerChoiceNum, computerChoiceNum)
 			playerScore += currPlayerScore
 			computerScore += currComputerScore
 			fmt.Printf("Score: %d:%d\n", playerScore, computerScore)
