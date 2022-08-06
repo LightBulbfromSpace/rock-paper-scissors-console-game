@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"os"
 )
 
 const (
@@ -65,4 +66,8 @@ func FTotalResult(w io.Writer, playerScore, computerScore int) {
 	} else {
 		fmt.Fprintln(w, "Computer wins!")
 	}
+}
+
+func TotalResult(playerScore, computerScore int) {
+	FTotalResult(os.Stdout, playerScore, computerScore)
 }

@@ -54,7 +54,7 @@ func main() {
 			fmt.Printf("Score: %d:%d\n", playerScore, computerScore)
 		}
 
-		totalResult(playerScore, computerScore)
+		rps.TotalResult(playerScore, computerScore)
 
 		fmt.Println("Do you want to play again? Press [y/any character]")
 		continueGameStr, _ := reader.ReadString('\n')
@@ -85,8 +85,4 @@ func clearScreen(w io.Writer) {
 	if err != nil {
 		log.Println(err)
 	}
-}
-
-func totalResult(playerScore, computerScore int) {
-	rps.FTotalResult(os.Stdout, playerScore, computerScore)
 }
