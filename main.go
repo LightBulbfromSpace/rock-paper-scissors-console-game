@@ -30,40 +30,53 @@ func main() {
 	fmt.Println(`Print 'r(ock)', 'p(aper)' or 's(cissors)' for rock, paper or scissors.`)
 	fmt.Print("----------\n")
 
-	for playerScore < 3 && computerScore < 3 {
-		rand.Seed(time.Now().UnixNano())
-		fmt.Print("\nYour turn: ")
-		playerChoice, err := reader.ReadString('\n')
+	continueGame := true
 
-		if err != nil {
-			log.Println(err)
+	for continueGame {
+		for playerScore < 3 && computerScore < 3 {
+			rand.Seed(time.Now().UnixNano())
+			fmt.Print("\nYour turn: ")
+			playerChoice, err := reader.ReadString('\n')
+
+			if err != nil {
+				log.Println(err)
+			}
+
+			playerChoice = playerChoice[:len(playerChoice)-1]
+			playerChoiceNum, err := convertPlayerChoiceToNum(playerChoice)
+
+			if err != nil {
+				fmt.Println(err)
+				continue
+			}
+
+			computerChoiceNum := rand.Int() % 3
+			computerChoice := covertComputerChoiceToString(computerChoiceNum)
+			fmt.Printf("Computer chooses: %s\n", computerChoice)
+
+			currPlayerScore, currComputerScore := roundWinner(playerChoiceNum, computerChoiceNum)
+			playerScore += currPlayerScore
+			computerScore += currComputerScore
+			fmt.Printf("Score: %d:%d\n", playerScore, computerScore)
 		}
 
-		playerChoice = playerChoice[:len(playerChoice)-1]
-		playerChoiceNum, err := convertPlayerChoiceToNum(playerChoice)
+		totalResult(playerScore, computerScore)
 
-		if err != nil {
-			fmt.Println(err)
-			continue
+		fmt.Println("Do you want to play again? Press [y/any character]")
+		continueGameStr, _ := reader.ReadString('\n')
+		if continueGameStr == "y\n" {
+			continueGame = true
+			playerScore, computerScore = 0, 0
+		} else {
+			continueGame = false
 		}
-
-		computerChoiceNum := rand.Int() % 3
-		computerChoice := covertComputerChoiceToString(computerChoiceNum)
-		fmt.Printf("Computer chooses: %s\n", computerChoice)
-
-		currPlayerScore, currComputerScore := roundWinner(playerChoiceNum, computerChoiceNum)
-		playerScore += currPlayerScore
-		computerScore += currComputerScore
-		fmt.Printf("Score: %d:%d\n", playerScore, computerScore)
 	}
-
-	totalResult(playerScore, computerScore)
 }
 
 func clearScreen(w io.Writer) {
 	var cmd *exec.Cmd
 	os := runtime.GOOS
-	
+
 	switch os {
 	case "linux":
 		cmd = exec.Command(`clear`)
